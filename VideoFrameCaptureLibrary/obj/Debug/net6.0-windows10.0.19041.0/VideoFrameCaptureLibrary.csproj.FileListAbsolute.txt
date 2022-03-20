@@ -1,0 +1,12 @@
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\bin\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.deps.json
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\bin\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.dll
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\bin\Debug\net6.0-windows10.0.19041.0\ref\VideoFrameCaptureLibrary.dll
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\bin\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.pdb
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.csproj.AssemblyReference.cache
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.AssemblyInfoInputs.cache
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.AssemblyInfo.cs
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.csproj.CoreCompileInputs.cache
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.dll
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\ref\VideoFrameCaptureLibrary.dll
+C:\Users\ryank\source\repos\VideoFrameCaptureLibrary\VideoFrameCaptureLibrary\obj\Debug\net6.0-windows10.0.19041.0\VideoFrameCaptureLibrary.pdb

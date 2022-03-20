@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "a0d11f99-c261-45f2-ac74-62bd15fcadeb": {
+      "ProjectGuid": "a0d11f99-c261-45f2-ac74-62bd15fcadeb",
+      "DisplayName": "VideoFrameCaptureLibrary",
+      "ColorIndex": 0
+    }
+  },
+  "NextColorIndex": 1
+}
