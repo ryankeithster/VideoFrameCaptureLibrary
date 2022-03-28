@@ -72,7 +72,6 @@ namespace VideoFrameCaptureLibrary
                 {
                     return;
                 }
-
                 prevFrameTime = dtNow;
             }
 
