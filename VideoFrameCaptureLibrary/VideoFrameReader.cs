@@ -14,10 +14,19 @@ namespace VideoFrameCaptureLibrary
     {
         private FrameReaderBuilder _frameReaderBuilder;
         private MediaFrameReader? _frameReader;
-        public VideoFrameReader()
+        private uint _framesPerSecond;
+        private double minMillisecondsBetweenFrames;
+        private DateTime prevFrameTime;
+        private static object _lock = new object();
+
+        public VideoFrameReader(uint framesPerSecond)
         {
             //string cameraName = "C615";
             string cameraName = "Surface";
+
+            _framesPerSecond = framesPerSecond;
+
+            minMillisecondsBetweenFrames = 1000.0 / framesPerSecond;
 
             // Build a video frame reader to capture 720p video.
             // NV12 seems to be the preferred format. Attempting to use MJPG instead for instance still results in NV12 imagery.
@@ -46,13 +55,25 @@ namespace VideoFrameCaptureLibrary
         /// <seealso cref="https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/process-media-frames-with-mediaframereader"/>
         /// <param name="sender"></param>
         /// <param name="args"></param>
-        private static async void ColorFrameReader_FrameArrivedAsync(MediaFrameReader sender, MediaFrameArrivedEventArgs args)
+        private async void ColorFrameReader_FrameArrivedAsync(MediaFrameReader sender, MediaFrameArrivedEventArgs args)
         {
             // Grab the current timestamp immediately. This will be used to generate a unique
             // output file name, and waiting until later in the method to grab the timestamp
             // can result in resource contention as other threads grab the same timestamp and
             // try and create a file that has already been created by previous threads
             DateTime dtNow = DateTime.UtcNow;
+
+            lock (_lock)
+            {
+                TimeSpan timeSinceLastFrame = dtNow - prevFrameTime;
+                double msSinceLastFrame = timeSinceLastFrame.TotalMilliseconds;
+
+                if (msSinceLastFrame < minMillisecondsBetweenFrames)
+                {
+                    return;
+                }
+                prevFrameTime = dtNow;
+            }
 
             Console.WriteLine(DateTime.Now.Millisecond.ToString() + " " + Thread.CurrentThread.ManagedThreadId + " ==> Frame received");
 
@@ -93,7 +114,13 @@ namespace VideoFrameCaptureLibrary
 
                         // frameBytes now contains the JPEG data; write it out!
                         string fileName = @"C:\temp\video_frames\" + dtNow.Hour.ToString() + "h_" + dtNow.Minute.ToString() + "m_" + dtNow.Second.ToString() + "s_" + dtNow.Millisecond.ToString() + "ms.jpg";
-                        File.WriteAllBytes(fileName, frameBytes);
+
+                        using (FileStream fs = File.Open(fileName, FileMode.Create, FileAccess.Write, FileShare.Read))
+                        {
+                            fs.Write(frameBytes, 0, frameBytes.Length);
+                            fs.Flush();
+                        }
+                        //File.WriteAllBytes(fileName, frameBytes);
                     }
 
                 }
