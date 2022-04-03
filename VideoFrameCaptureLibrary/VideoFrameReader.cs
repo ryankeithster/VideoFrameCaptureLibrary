@@ -39,12 +39,22 @@ namespace VideoFrameCaptureLibrary
             _frameReader = await _frameReaderBuilder.Build();
         }
 
-        public async void StartCapture()
+        public async Task StartCapture()
         {
             if (_frameReader != null)
             {
                 _frameReader.FrameArrived += ColorFrameReader_FrameArrivedAsync;
                 await _frameReader.StartAsync();
+            }
+        }
+
+        public async Task StopCapture()
+        {
+            await _frameReader?.StopAsync();
+
+            if (_frameReader != null)
+            {
+                _frameReader.FrameArrived -= ColorFrameReader_FrameArrivedAsync;
             }
         }
 
@@ -63,6 +73,8 @@ namespace VideoFrameCaptureLibrary
             // try and create a file that has already been created by previous threads
             DateTime dtNow = DateTime.UtcNow;
 
+            // Ensure that prevFrameTime is only modified by one thread at a time in this critical
+            // section so that we continue to capture frames at the desired frames per second.
             lock (_lock)
             {
                 TimeSpan timeSinceLastFrame = dtNow - prevFrameTime;
@@ -120,10 +132,14 @@ namespace VideoFrameCaptureLibrary
                             fs.Write(frameBytes, 0, frameBytes.Length);
                             fs.Flush();
                         }
+
+                        interimRgbSwBmp.Dispose();
                         //File.WriteAllBytes(fileName, frameBytes);
                     }
 
                 }
+
+                mediaFrameReference.Dispose();
             }
         }
     }

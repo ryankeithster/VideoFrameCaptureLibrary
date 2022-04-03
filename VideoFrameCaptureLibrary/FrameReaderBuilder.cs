@@ -137,7 +137,6 @@ namespace VideoFrameCaptureLibrary
                     break;
                 }
             }
-
             return deviceId;
         }
 
